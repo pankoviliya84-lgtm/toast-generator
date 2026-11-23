@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Придумайте тост для дня рождения, свадьбы или встречи с друзьями.">
+<title>Звучит как тост — генератор тостов</title>
+<style>
+:root{color-scheme:light;--paper:#101d16;--ink:#202e25;--muted:#435447;--line:#b4aa85;--wine:#214d37;--peach:#f3d59b;--serif:"Baskervville",Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+.wrap{width:min(880px,calc(100% - 88px));margin:auto}
+header{position:absolute;z-index:2;top:0;left:0;width:100%;color:#ead9b3;background:linear-gradient(#07130fd9,transparent)}
+.brand{display:flex;align-items:center;justify-content:center;gap:9px;min-height:54px;font:700 17px/1.2 var(--serif);letter-spacing:.045em}
+.mark{display:grid;place-items:center;width:26px;height:26px;color:var(--peach);border:1px solid #cd9d6c;border-radius:50%;font:700 22px var(--serif);padding-top:4px}
+main{position:relative;isolation:isolate;background:#101d16}
+.stage{height:39vw;position:relative;overflow:hidden;pointer-events:none;background:url("./wedding.webp") center top / 100% auto no-repeat}
+.stage::after{content:"";position:absolute;inset:75% 0 0;background:linear-gradient(transparent,#0b1c16a6)}
+h1{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.footlight{position:absolute;bottom:5%;width:50%;height:95%;pointer-events:none;mix-blend-mode:screen;opacity:.25;filter:blur(11px);transform-origin:50% 100%;background:conic-gradient(from -25deg at 50% 100%,transparent 0deg,#fff1b7a6 15deg,#fff7d5b5 28deg,transparent 50deg);clip-path:polygon(4% 0,96% 0,54% 100%,46% 100%)}
+.footlight.left{left:0;transform:rotate(-15deg)}
+.footlight.right{right:0;transform:rotate(15deg)}
+@media(prefers-reduced-motion:no-preference){.footlight.left{animation:sweep-left 12s ease-in-out infinite alternate}.footlight.right{animation:sweep-right 15s ease-in-out infinite alternate}@keyframes sweep-left{from{transform:rotate(-20deg);opacity:.18}to{transform:rotate(23deg);opacity:.4}}@keyframes sweep-right{from{transform:rotate(21deg);opacity:.3}to{transform:rotate(-22deg);opacity:.18}}}
+.workspace.wrap{width:100%;padding:36px 0 90px;background-color:#dec8a3;background-image:linear-gradient(#0b1c16b3,transparent 90px),url("./banquet.webp");background-position:center,center;background-size:100% 100%,cover;background-repeat:no-repeat}.workspace>.grid{width:min(880px,calc(100% - 88px));margin-left:auto;margin-right:auto}
+.grid{display:grid;grid-template-columns:minmax(300px, .9fr) minmax(0,1.15fr);gap:20px;align-items:stretch}
+form,.card{border-radius:20px;padding:clamp(22px,4vw,36px);box-shadow:0 10px 40px #091b2438;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+form{border:1px solid var(--line);background:#fff9e5e8;display:grid;gap:17px}
+h2{font:normal 30px/1.1 var(--serif);margin:0 0 2px}
+label,legend{font-size:14px;font-weight:700}
+label{display:block}
+.optional{font-weight:400;color:var(--muted)}
+select,input[type=text],textarea{display:block;width:100%;margin-top:6px;padding:11px 12px;min-height:45px;font:inherit;font-size:16px;background:#fffff5cc;border:1px solid #a69f87;border-radius:10px;color:var(--ink)}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend{padding:0;margin-bottom:6px}
+.options{display:flex;flex-wrap:wrap;gap:6px}
+.options label{position:relative;cursor:pointer}
+.options input{position:absolute;opacity:0}
+.options span{display:block;border:1px solid #cdb9a8;border-radius:24px;padding:6px 12px;font-weight:500}
+.options input:checked+span{background:#e2eddf;border-color:var(--wine);color:var(--wine);font-weight:700}
+.options input:focus-visible+span,:is(button,input,select,textarea):focus-visible{outline:3px solid #ad626f;outline-offset:3px}
+button{font:inherit;font-weight:700;cursor:pointer;border:1px solid transparent;border-radius:12px;padding:11px 16px;min-height:46px}
+.primary{background:var(--wine);color:#fff}
+.primary:hover{background:#32684b}
+.card{background:linear-gradient(140deg,#163e30ed,#183b2cea);color:#fff8ef;display:flex;flex-direction:column;position:relative;overflow:hidden;isolation:isolate;min-height:370px}
+.card blockquote{text-shadow:0 1px 4px #071d16}
+.card h2{font:700 13px/1.5 system-ui,sans-serif;color:var(--peach);letter-spacing:.12em;text-transform:uppercase}
+.quote-mark{height:67px;font:110px/.95 var(--serif);color:var(--peach);margin-top:22px}
+blockquote{margin:0 0 30px;font:clamp(21px,2.4vw,27px)/1.4 var(--serif);overflow-wrap:anywhere}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:auto}
+.copy{background:var(--peach);color:#38201e}
+.copy:hover{background:#ffd5b6}
+.status{font-size:14px;color:#ffd9bf}
+textarea{min-height:126px;resize:vertical}
+button:disabled{cursor:default;opacity:.66}
+footer{padding:16px;text-align:center;background:#0c2118;color:#ead9b3;font-size:14px}
+@media(max-width:740px){.grid{grid-template-columns:minmax(0,1fr)}.wrap{width:calc(100% - 44px)}.stage{height:39vw!important;min-height:0;background:url("./wedding.webp") center top / 100% auto no-repeat}main{background:none}.workspace.wrap{padding:24px 0 65px}.workspace>.grid{width:calc(100% - 44px)}.card{min-height:0}.workspace{padding-bottom:65px}form,.card{padding:24px}.brand{font-size:15px}blockquote{font-size:27px}.footlight{height:90%;width:65%}}
+@media(prefers-reduced-motion:no-preference){.fresh{animation:appear .25s ease-out}@keyframes appear{from{opacity:.45;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="mark" aria-hidden="true">“</span> Звучит как тост</div></header>
+<main>
+<div class="stage"><h1>Генератор тостов</h1><div class="footlight left" aria-hidden="true"></div><div class="footlight right" aria-hidden="true"></div></div>
+<div class="workspace wrap">
+
+<div class="grid">
+<form id="settings">
+<h2>Какой тост нужен?</h2>
+<label>Повод
+<select id="occasion">
+</select></label>
+<label>Кому посвящён тост <span class="optional">· необязательно</span>
+<input type="text" id="name" maxlength="60" placeholder="Например, Оля или наши друзья"></label>
+<label>Настроение<select id="tone"><option value="all">Все варианты</option><option value="warm">Душевно</option><option value="light">С улыбкой</option><option value="formal">Торжественно</option></select></label>
+<fieldset><legend>Длина</legend><div class="options">
+<label><input type="radio" name="lengthMode" value="short"><span>Короткий</span></label>
+<label><input type="radio" name="lengthMode" value="long" checked><span>Полный текст</span></label>
+</div></fieldset>
+<button class="primary" type="submit">Следующий тост</button>
+</form>
+<section class="card" aria-labelledby="result-title">
+<h2 id="result-title">Ваш тост</h2>
+<div class="quote-mark" aria-hidden="true">“</div>
+<blockquote id="toast" aria-live="polite"></blockquote>
+<div class="actions"><button class="copy" type="button" id="copy">Скопировать тост</button><span class="status" id="status" role="status"></span></div>
+</section>
+</div>
+</div>
+</main>
+<footer>Звучит как тост</footer>
+<script src="./vk-bridge.min.js"></script>
+<script>
+// Initialize only when launched by VK; the ordinary website remains usable.
+if (new URLSearchParams(location.search).has('vk_app_id') && window.vkBridge) {
+  window.vkBridge.send('VKWebAppInit').catch(() => {
+    console.warn('VK initialization did not complete.');
+  });
+}
+</script>
+<script src="./catalog.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
